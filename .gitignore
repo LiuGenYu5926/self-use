@@ -1,0 +1,7 @@
+/.idea
+
+# Project exclude paths
+/eureka-server/target/
+/gateway-server/target/
+/user-server/target/
+/work-server/target/

@@ -1,0 +1,44 @@
+# 开发环境配置
+server:
+  # 服务器的HTTP端口，默认为8080
+  port: 5921
+
+# 数据源配置
+spring:
+  #服务名称
+  application:
+    name: gateway-service
+  cloud:
+    loadbalancer:
+      retry:
+        enabled: true
+    nacos:
+      server-addr: localhost:8848
+      discovery:
+        namespace: 00f9c098-31b9-435a-bc58-6430d05123d0
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: work-service
+          uri: lb://work-service
+          predicates:
+            - Path=/pc/schedule/**
+
+
+knife4j:
+  gateway:
+    enabled: true
+    strategy: discover
+    discover:
+      # 聚合所有子服务(swagger2规范)，子服务是3规范则替换为openapi3
+      version: swagger2
+      enabled: true
+
+
+#日志输出
+logging:
+  level:
+    com.web: DEBUG
+    com.github.xiaoymin.knife4j.spring.gateway: DEBUG
